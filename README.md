@@ -205,6 +205,106 @@ graph TB
     D --> G[Cuenta eliminada correctamente]
 ```
 
+### Diagrama de secuencia: Opciones para editar y eliminar vendedores
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant Sistema
+    participant BaseDatos
+
+    Usuario->>Sistema: Visualiza lista de vendedores
+    Sistema->>BaseDatos: Obtener lista de vendedores
+    BaseDatos-->>Sistema: Lista de vendedores
+    Sistema->>Usuario: Muestra lista con opciones de editar y eliminar
+```
+
+### Diagrama de secuencia: Eliminar un vendedor y sus negocios y productos
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant Sistema
+    participant BaseDatos
+
+    Usuario->>Sistema: Selecciona eliminar vendedor
+    Sistema->>Usuario: Confirma eliminación
+    Usuario->>Sistema: Confirma eliminación
+    Sistema->>BaseDatos: Eliminar vendedor, negocios y productos asociados
+    BaseDatos-->>Sistema: Confirmación de eliminación
+    Sistema->>Usuario: Muestra mensaje de éxito
+```
+
+### Diagrama de secuencia: Asignar un negocio al vendedor al crear uno nuevo
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant Sistema
+    participant BaseDatos
+
+    Usuario->>Sistema: Crea nuevo vendedor
+    Sistema->>Usuario: Solicita información del vendedor
+    Usuario->>Sistema: Completa información
+    Sistema->>Usuario: Solicita asignar un negocio
+    Usuario->>Sistema: Asigna negocio
+    Sistema->>BaseDatos: Guardar nuevo vendedor con negocio asignado
+    BaseDatos-->>Sistema: Confirmación de guardado
+    Sistema->>Usuario: Muestra mensaje de éxito
+```
+
+### Diagrama de secuencia: Validación de datos al registrar o actualizar vendedor
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant Sistema
+    participant BaseDatos
+
+    Usuario->>Sistema: Intenta guardar vendedor
+    Sistema->>Sistema: Valida datos (nombre, correo, teléfono)
+    Sistema-->>Usuario: Datos válidos
+    Sistema->>BaseDatos: Guardar datos del vendedor
+    BaseDatos-->>Sistema: Confirmación de guardado
+    Sistema->>Usuario: Muestra mensaje de éxito
+    Sistema-->>Usuario: Muestra mensaje de error si los datos no son válidos
+```
+
+### Diagrama de secuencia: Vendedor eliminado no aparece en la lista
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant Sistema
+    participant BaseDatos
+
+    Usuario->>Sistema: Visualiza lista de vendedores
+    Sistema->>BaseDatos: Obtener lista de vendedores
+    BaseDatos-->>Sistema: Lista de vendedores (sin el eliminado)
+    Sistema->>Usuario: Muestra lista actualizada
+```
+
+### Diagrama de secuencia: Buscar vendedor específico por nombre o correo
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant Sistema
+    participant BaseDatos
+
+    Usuario->>Sistema: Inicia búsqueda por nombre o correo
+    Sistema->>BaseDatos: Buscar vendedor por nombre o correo
+    BaseDatos-->>Sistema: Resultados de búsqueda
+    Sistema->>Usuario: Muestra resultados de búsqueda
+```
+
+### Diagrama de secuencia: Reflejo en tiempo real de cambios en la lista de vendedores
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant Sistema
+    participant BaseDatos
+
+    Usuario->>Sistema: Realiza cambio (crear, editar o eliminar vendedor)
+    Sistema->>BaseDatos: Confirma cambio en la base de datos
+    BaseDatos-->>Sistema: Confirmación de cambio
+    Sistema->>Usuario: Muestra lista de vendedores actualizada en menos de 5 segundos
+```
+
 ### Caso de Uso: Gestión de negocios
 
 ```mermaid
